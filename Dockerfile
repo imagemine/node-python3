@@ -15,6 +15,7 @@ RUN addgroup -g 1000 -S appg && \
     adduser -u 10000 -G app -S user && \
     # For backward compatibility
     adduser app appg && \
+    mkdir -p /opt/app && mkdir -p /opt/db-migrations && ln -s /opt/app /libs && ln -s /opt/db-migrations /flyway && \
     chown -R user:app /opt/app /libs /opt/db-migrations /flyway && \
     chmod -R g+rwx /opt/app /libs /opt/db-migrations /flyway
 
