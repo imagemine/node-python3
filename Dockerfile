@@ -1,5 +1,5 @@
-ARG NODE_VERSION=3.18.0
-FROM alpine:${NODE_VERSION}
+ARG NODE_VERSION=18.16.0
+FROM alpine:3.18.0
 
 RUN apk update && \
     apk add sqlite-dev python3 cmake g++ nodejs npm yarn && \
