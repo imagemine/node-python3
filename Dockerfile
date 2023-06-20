@@ -6,8 +6,8 @@ RUN apk update && \
     apk upgrade libcrypto3 libssl3 binutils && \
     rm -rf /var/lib/apt/lists/* && \
     yarn config set python /usr/bin/python3 && \
-    npm install -g sqlite3 better-sqlite3 && \
-    yarn global add sqlite3 better-sqlite3
+    npm install -g sqlite3 better-sqlite3 node-gyp && \
+    yarn global add sqlite3 better-sqlite3 node-gyp
 
 
 RUN addgroup -g 1000 -S appg && \
