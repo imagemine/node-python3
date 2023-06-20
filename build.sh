@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -eo pipefail
 
 
@@ -40,9 +39,9 @@ create_tag
 if [[ ! -z ${version} ]];
 then
   source project.properties
-  image_version_tag="${owner}/${project}:${version}-${base_version}"
+  image_version_tag="${owner}/${project}:${node_version}-${version}"
   image_latest_tag="${owner}/${project}:latest"
-  docker build --no-cache -t ${image_latest_tag} . --build-arg NODE_VERSION=${version}
+  docker build --no-cache -t ${image_version_tag} . --build-arg NODE_VERSION=${node_version}
 
   if [[ "$version" != "local" ]]; then
     docker push ${image_version_tag}
