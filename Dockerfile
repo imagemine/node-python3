@@ -1,8 +1,9 @@
-FROM alpine:3.18.0
+ARG NODE_VERSION=3.18.0
+FROM alpine:${NODE_VERSION}
 
 RUN apk update && \
     apk add sqlite-dev python3 cmake g++ nodejs npm yarn && \
-    apk upgrade libcrypto3 libssl3 && \
+    apk upgrade libcrypto3 libssl3 binutils && \
     rm -rf /var/lib/apt/lists/* && \
     yarn config set python /usr/bin/python3 && \
     npm install -g sqlite3 better-sqlite3 && \
