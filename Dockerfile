@@ -1,13 +1,13 @@
 ARG NODE_VERSION=18.16.0
-FROM alpine:3.18.0
+FROM alpine:3.18.2
 
 RUN apk update && \
     apk add sqlite-dev python3 cmake g++ nodejs npm yarn && \
-    apk upgrade libcrypto3 libssl3 binutils && \
+    apk upgrade libcrypto3 libssl3 binutils libarchive && \
     rm -rf /var/lib/apt/lists/* && \
     yarn config set python /usr/bin/python3 && \
-    npm install -g sqlite3 better-sqlite3 node-gyp && \
-    yarn global add sqlite3 better-sqlite3 node-gyp
+    npm install -g better-sqlite3 node-gyp && \
+    yarn global add better-sqlite3 node-gyp
 
 
 RUN addgroup -g 1000 -S appg && \
