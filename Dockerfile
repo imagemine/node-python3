@@ -1,13 +1,17 @@
-ARG NODE_VERSION=18.16.0
-FROM alpine:3.18.2
+FROM alpine:edge
+ENV NODE_VERSION=18.17.0
 
-RUN apk update && \
-    apk add sqlite-dev python3 cmake g++ nodejs npm yarn && \
-    apk upgrade libcrypto3 libssl3 binutils libarchive && \
-    rm -rf /var/lib/apt/lists/* && \
-    yarn config set python /usr/bin/python3 && \
-    npm install -g better-sqlite3 node-gyp && \
-    yarn global add better-sqlite3 node-gyp
+RUN rm -rf /usr/lib/node_modules
+RUN apk update
+RUN apk add --no-cache --update sqlite-dev python3 cmake g++ nodejs yarn npm
+RUN rm -rf /var/cache/apk/*
+RUN apk upgrade --no-cache libcrypto3 libssl3 binutils libarchive
+RUN rm -rf /var/lib/apt/lists/*
+RUN yarn config set python /usr/bin/python3
+RUN npm cache clean -f
+RUN yarn cache clean -f
+RUN npm install -g better-sqlite3 node-gyp
+RUN yarn global add better-sqlite3 node-gyp
 
 
 RUN addgroup -g 1000 -S appg && \
@@ -21,4 +25,3 @@ RUN addgroup -g 1000 -S appg && \
     chmod -R g+rwx /opt/app /libs /opt/db-migrations /flyway
 
 USER user
-
