@@ -1,5 +1,5 @@
 FROM alpine:edge
-ENV NODE_VERSION=18.17.0
+ENV NODE_VERSION=20.12.2
 
 RUN rm -rf /usr/lib/node_modules
 RUN apk update
